@@ -1,0 +1,24 @@
+{
+  "devices": [
+    {
+      "Id": "1234",
+      "Type": "Sensor",
+      "Price": 20,
+      "Currency": "USD",
+      "isFavorite": false,
+      "imageUrl": "",
+      "Title": "Test Sensor",
+      "Description": ""
+    },
+    {
+      "Id": "1235",
+      "Type": "Thermostat",
+      "Price": 25,
+      "Currency": "USD",
+      "isFavorite": false,
+      "imageUrl": "",
+      "Title": "Test Thermostat",
+      "Description": ""
+    }
+  ]
+}
