@@ -1,7 +1,9 @@
 package com.omarhezi.valetdevices.deviceslist.api.modules
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class DeviceResponse(
 
 	@Json(name="Currency")

@@ -5,6 +5,6 @@ import retrofit2.http.GET
 
 interface DevicesAPI {
 
-    @GET("v1/all-devices")
-    fun getAllDevices() : DevicesListResponse
+    @GET("deviceslist")
+    suspend fun getAllDevices() : DevicesListResponse
 }

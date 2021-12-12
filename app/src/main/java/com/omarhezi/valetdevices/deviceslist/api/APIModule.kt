@@ -1,21 +1,26 @@
 package com.omarhezi.valetdevices.deviceslist.api
 
 import android.content.Context
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import okhttp3.*
+import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.OkHttpClient
+import okhttp3.Protocol
+import okhttp3.Response
 import okhttp3.ResponseBody.Companion.toResponseBody
+import retrofit2.CallAdapter
 import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
-
 
 @Module
 @InstallIn(SingletonComponent::class)
-class APIModule {
+object APIModule {
 
     @Singleton
     @Provides
@@ -31,6 +36,14 @@ class APIModule {
 
     @Singleton
     @Provides
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+        .addConverterFactory(MoshiConverterFactory.create())
+        .baseUrl(MockInterceptor.BASE_URL)
+        .client(okHttpClient)
+        .build()
+
+    @Singleton
+    @Provides
     fun provideApiService(retrofit: Retrofit): DevicesAPI = retrofit.create(DevicesAPI::class.java)
 
     @Singleton
@@ -43,12 +56,13 @@ class MockInterceptor(private val context: Context) : Interceptor {
         val url = chain.request().url
 
         return when (url.encodedPath) {
-            ALL_DEVICES_ENDPOINT -> {
+            "/$ALL_DEVICES_ENDPOINT" -> {
                 val response: String = readJsonFile(ALL_DEVICES_ENDPOINT)
                 return Response.Builder()
                     .code(200)
                     .message(response)
                     .request(chain.request())
+                    .protocol(Protocol.HTTP_1_1)
                     .body(response.toResponseBody(response.toMediaTypeOrNull()))
                     .addHeader("content-type", "application/json")
                     .build()
@@ -57,6 +71,7 @@ class MockInterceptor(private val context: Context) : Interceptor {
                 .code(404)
                 .message("Error")
                 .request(chain.request())
+                .protocol(Protocol.HTTP_1_1)
                 .addHeader("content-type", "application/json")
                 .build()
         }
@@ -69,6 +84,7 @@ class MockInterceptor(private val context: Context) : Interceptor {
     }
 
     companion object {
-        const val ALL_DEVICES_ENDPOINT = "v1/all-devices"
+        public const val BASE_URL = "https://localhost/"
+        const val ALL_DEVICES_ENDPOINT = "deviceslist"
     }
 }

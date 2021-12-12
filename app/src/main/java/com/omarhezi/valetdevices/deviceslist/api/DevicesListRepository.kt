@@ -6,7 +6,9 @@ import kotlinx.coroutines.withContext
 
 class DevicesListRepository(private val devicesAPI: DevicesAPI) {
     suspend fun getAllDevices() = withContext(Dispatchers.IO) {
-        devicesAPI.getAllDevices().devices?.map {
+        val devices = devicesAPI.getAllDevices()
+        val devicesList = devices.devices
+        devicesList?.map {
             it.toDevice()
         }.orEmpty()
     }
