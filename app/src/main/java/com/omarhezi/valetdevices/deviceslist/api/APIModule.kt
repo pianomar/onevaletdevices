@@ -9,6 +9,7 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.ResponseBody.Companion.toResponseBody
+import retrofit2.Retrofit
 import javax.inject.Singleton
 
 
@@ -27,6 +28,14 @@ class APIModule {
             .Builder()
             .addInterceptor(interceptor)
             .build()
+
+    @Singleton
+    @Provides
+    fun provideApiService(retrofit: Retrofit): DevicesAPI = retrofit.create(DevicesAPI::class.java)
+
+    @Singleton
+    @Provides
+    fun providesRepository(apiService: DevicesAPI) = DevicesListRepository(apiService)
 }
 
 class MockInterceptor(private val context: Context) : Interceptor {
