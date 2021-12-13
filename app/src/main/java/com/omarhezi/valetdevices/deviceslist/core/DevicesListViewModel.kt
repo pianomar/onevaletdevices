@@ -9,7 +9,6 @@ import com.omarhezi.valetdevices.deviceslist.api.DevicesListRepository
 import com.omarhezi.valetdevices.deviceslist.ui.SectionItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import okhttp3.internal.wait
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,16 +22,7 @@ class DevicesListViewModel @Inject constructor(
     fun getAllDevices() {
         viewModelScope.launch {
             val allDevices = repository.getAllDevices().map {
-                SectionItem.DeviceViewData(
-                    currency = it.currency,
-                    price = it.price,
-                    type = it.type,
-                    isFavorite = it.isFavorite,
-                    description = it.description,
-                    title = it.title,
-                    id = it.id,
-                    imageUrl = it.imageUrl
-                )
+                it.toViewData()
             }
 
             val sections = mutableListOf<SectionItem>(SectionItem.Header(R.string.all_devices))

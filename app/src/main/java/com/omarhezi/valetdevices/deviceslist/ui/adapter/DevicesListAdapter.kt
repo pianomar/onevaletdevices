@@ -1,12 +1,11 @@
-package com.omarhezi.valetdevices.deviceslist.ui
+package com.omarhezi.valetdevices.deviceslist.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.omarhezi.valetdevices.databinding.DeviceListitemBinding
 import com.omarhezi.valetdevices.databinding.DevicesListHeaderListitemBinding
-import com.omarhezi.valetdevices.deviceslist.ui.adapter.DevicesViewHolder
-import com.omarhezi.valetdevices.deviceslist.ui.adapter.HeaderViewHolder
+import com.omarhezi.valetdevices.deviceslist.ui.SectionItem
 
 class DevicesListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

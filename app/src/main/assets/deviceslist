@@ -1,26 +1,27 @@
 {
   "devices": [
     {
-      "Id": "1234",
+      "Id": "1",
       "Type": "Sensor",
       "Price": 20,
       "Currency": "USD",
       "isFavorite": false,
-      "imageUrl": "",
-      "Title": "Test Sensor",
-      "Description": "",
-      "Status": "Available"
+      "imageUrl": "https://img.reuter.com/products/hg/568x568/hansgrohe-ecostat-square-concealed-thermostat-for-2-outlets-matt-black--hg-15714670_0.jpg",
+      "Title": "Light Sensor",
+      "Description": "Photodetectors, also called photosensors, are sensors of light or other electromagnetic radiation. There is a wide variety of photodetectors which may be classified by mechanism of detection, such as photoelectric or photochemical effects, or by various performance metrics, such as spectral response",
+      "Status": 1
     },
     {
-      "Id": "1235",
+      "Id": "2",
       "Type": "Thermostat",
       "Price": 25,
       "Currency": "USD",
       "isFavorite": false,
-      "imageUrl": "",
-      "Title": "Test Thermostat",
-      "Description": "",
-      "Status": "Unavailable"
+      "imageUrl": "https://www.sumring.com/wp-content/uploads/2018/12/2345_image_file_copy_10.jpg",
+      "Title": "Nest Thermostat",
+      "Description": "A thermostat is a regulating device component which senses the temperature of a physical system and performs actions so that the system's temperature is maintained near a desired setpoint.",
+      "Status": 1
     }
+
   ]
 }

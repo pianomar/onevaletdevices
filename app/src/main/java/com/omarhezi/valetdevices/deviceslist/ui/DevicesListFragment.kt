@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import com.omarhezi.valetdevices.R
 import com.omarhezi.valetdevices.databinding.DevicesFragmentBinding
 import com.omarhezi.valetdevices.deviceslist.core.DevicesListViewModel
+import com.omarhezi.valetdevices.deviceslist.ui.adapter.DevicesListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

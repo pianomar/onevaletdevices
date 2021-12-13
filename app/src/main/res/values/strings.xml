@@ -2,4 +2,7 @@
     <string name="app_name">valetdevices</string>
     <string name="device_image_accessibility">Device image</string>
     <string name="all_devices">All devices</string>
+    <string name="available">Available</string>
+    <string name="unavailable">Unavailable</string>
+    <string name="unknown">N/A</string>
 </resources>

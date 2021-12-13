@@ -1,6 +1,8 @@
 package com.omarhezi.valetdevices.deviceslist.ui
 
+import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
+import com.omarhezi.valetdevices.R
 
 sealed class SectionItem {
     abstract val itemType: ItemType
@@ -13,9 +15,10 @@ sealed class SectionItem {
         val description: String? = null,
         val title: String? = null,
         val id: String? = null,
-        val imageUrl: String? = null
-
-        ) : SectionItem() {
+        val imageUrl: String? = null,
+        @StringRes val status: Int? = null,
+        @ColorRes val statusColor: Int = R.color.black,
+    ) : SectionItem() {
         override val itemType = ItemType.DEVICE
     }
 
