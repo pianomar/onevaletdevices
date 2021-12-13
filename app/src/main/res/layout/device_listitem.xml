@@ -4,10 +4,12 @@
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/double_standard_margin"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/double_standard_margin"
-        android:background="?selectableItemBackground"
-        android:layout_height="wrap_content">
+        android:layout_marginTop="@dimen/double_standard_margin"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?selectableItemBackground">
 
         <ImageView
             android:id="@+id/device_image"
@@ -19,30 +21,37 @@
 
         <TextView
             android:id="@+id/device_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/standard_margin"
+            android:layout_marginEnd="@dimen/standard_margin"
             android:textSize="@dimen/item_title_fontsize"
+            app:layout_constraintEnd_toStartOf="@+id/fav_button"
             app:layout_constraintStart_toEndOf="@+id/device_image"
             app:layout_constraintTop_toTopOf="@id/device_image" />
 
         <TextView
             android:id="@+id/device_type"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/standard_margin"
             android:textColor="?colorSecondary"
+            app:layout_constraintBottom_toTopOf="@+id/device_status"
+            app:layout_constraintEnd_toStartOf="@+id/fav_button"
             app:layout_constraintStart_toStartOf="@id/device_name"
-            app:layout_constraintTop_toBottomOf="@+id/device_name"
-            app:layout_constraintBottom_toTopOf="@+id/device_status"/>
+            app:layout_constraintTop_toBottomOf="@+id/device_name" />
 
         <TextView
             android:id="@+id/device_status"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/standard_margin"
             app:layout_constraintBottom_toBottomOf="@+id/device_image"
+            app:layout_constraintEnd_toStartOf="@+id/fav_button"
             app:layout_constraintStart_toStartOf="@id/device_name" />
 
         <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/fav_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -41,6 +42,27 @@ class DevicesListFragment : Fragment() {
             adapter.notifyDataSetChanged()
         }
 
+        setupSearch()
+
         viewModel.getAllDevices()
+    }
+
+    private fun setupSearch() {
+        binding.searchButton.setOnClickListener {
+            binding.searchBox.visibility = View.VISIBLE
+            binding.searchButton.visibility = View.GONE
+            binding.searchBox.requestFocus()
+        }
+
+        binding.searchButton.setOnFocusChangeListener { _, focused ->
+            if (!focused) {
+                binding.searchBox.visibility = View.GONE
+                binding.searchButton.visibility = View.VISIBLE
+            }
+        }
+
+        binding.searchBox.addTextChangedListener {
+            viewModel.getDevicesByQuery(it.toString())
+        }
     }
 }

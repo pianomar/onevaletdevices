@@ -19,16 +19,36 @@ class DevicesListViewModel @Inject constructor(
     private val _devicesLiveData = MutableLiveData<List<SectionItem>>()
     val devicesLiveData: LiveData<List<SectionItem>> = _devicesLiveData
 
+    private var devicesSections = listOf<SectionItem>()
+
     fun getAllDevices() {
         viewModelScope.launch {
             val allDevices = repository.getAllDevices().map {
                 it.toViewData()
             }
 
-            val sections = mutableListOf<SectionItem>(SectionItem.Header(R.string.all_devices))
-            sections.addAll(allDevices)
+            val sections = generateSections(allDevices)
 
+            devicesSections = sections
             _devicesLiveData.value = sections
         }
+    }
+
+    fun getDevicesByQuery(text: String) {
+        if (text.trim().isEmpty()) { // reset
+            _devicesLiveData.value = devicesSections
+        } else {
+            val filteredList = devicesSections.filter {
+                (it as? SectionItem.DeviceViewData)?.title?.contains(text, ignoreCase = true) ?: false
+            }
+
+            _devicesLiveData.value = generateSections(filteredList)
+        }
+    }
+
+    private fun generateSections(allDevices: List<SectionItem>): MutableList<SectionItem> {
+        val sections = mutableListOf<SectionItem>(SectionItem.Header(R.string.all_devices))
+        sections.addAll(allDevices)
+        return sections
     }
 }

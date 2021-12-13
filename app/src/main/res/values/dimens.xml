@@ -5,4 +5,5 @@
     <dimen name="item_title_fontsize">16sp</dimen>
     <dimen name="big_margin">40dp</dimen>
     <dimen name="thumb_size">100dp</dimen>
+    <dimen name="row_height">48dp</dimen>
 </resources>
