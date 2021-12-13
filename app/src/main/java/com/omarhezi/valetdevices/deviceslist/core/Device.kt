@@ -1,7 +1,6 @@
 package com.omarhezi.valetdevices.deviceslist.core
 
 import com.omarhezi.valetdevices.deviceslist.api.modules.DeviceResponse
-import com.squareup.moshi.Json
 
 data class Device(
     val currency: String? = null,
