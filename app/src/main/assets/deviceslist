@@ -21,6 +21,39 @@
       "Title": "Nest Thermostat",
       "Description": "A thermostat is a regulating device component which senses the temperature of a physical system and performs actions so that the system's temperature is maintained near a desired setpoint.",
       "Status": 0
+    },
+    {
+      "Id": "3",
+      "Type": "Speaker",
+      "Price": 200,
+      "Currency": "USD",
+      "isFavorite": false,
+      "imageUrl": "https://i.pinimg.com/originals/17/dd/af/17ddaf3bb81fa27f832ff7e32ea5b4d7.png",
+      "Title": "Smart Speaker",
+      "Description": "Google Nest, previously named Google Home, is a line of smart speakers developed by Google under the Google Nest brand. The devices enable users to speak voice commands to interact with services through Google Assistant, the company's virtual assistant.",
+      "Status": 1
+    },
+    {
+      "Id": "4",
+      "Type": "Router",
+      "Price": 120,
+      "Currency": "USD",
+      "isFavorite": false,
+      "imageUrl": "https://www.trendnet.com/images/products/photos/TEW-830MDR2K/TEW-830MDR2K_v1.0R_d03_2.png",
+      "Title": "Mesh Router",
+      "Description": "TRENDnet's AC2200 WiFi Mesh Router System is designed to blanket your home or small office in seamless WiFi coverage. The AC2200 WiFi Mesh Router System provides ample coverage for up to a 4,000 square foot home. For larger homes, simply add additional AC2200 WiFi Mesh Routers to the system for expanded WiFi coverage.",
+      "Status": 1
+    },
+    {
+      "Id": "5",
+      "Type": "Display",
+      "Price": 950,
+      "Currency": "USD",
+      "isFavorite": false,
+      "imageUrl": "https://cdn.shopify.com/s/files/1/0452/2560/7328/products/image_1024-20_800x1026_crop_center@2x.png",
+      "Title": "Smart Display",
+      "Description": "TRENDnet's AC2200 WiFi Mesh Router System is designed to blanket your home or small office in seamless WiFi coverage. The AC2200 WiFi Mesh Router System provides ample coverage for up to a 4,000 square foot home. For larger homes, simply add additional AC2200 WiFi Mesh Routers to the system for expanded WiFi coverage.",
+      "Status": 1
     }
 
   ]
