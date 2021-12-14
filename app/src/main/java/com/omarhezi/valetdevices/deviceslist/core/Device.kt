@@ -1,10 +1,13 @@
 package com.omarhezi.valetdevices.deviceslist.core
 
+import android.os.Parcelable
 import com.omarhezi.valetdevices.R
 import com.omarhezi.valetdevices.deviceslist.api.modules.DeviceResponse
 import com.omarhezi.valetdevices.deviceslist.localdb.modules.DeviceEntity
 import com.omarhezi.valetdevices.deviceslist.ui.SectionItem
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Device(
     val currency: String? = null,
     val price: Int? = null,
@@ -15,7 +18,7 @@ data class Device(
     val id: String,
     val imageUrl: String? = null,
     val status: Status? = null,
-) {
+) : Parcelable {
     enum class Status(val value: Int) {
         AVAILABLE(1),
         UNAVAILABLE(0)

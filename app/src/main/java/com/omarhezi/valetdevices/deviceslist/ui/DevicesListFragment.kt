@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.omarhezi.valetdevices.R
 import com.omarhezi.valetdevices.databinding.DevicesFragmentBinding
+import com.omarhezi.valetdevices.devicedetails.ui.DeviceDetailsFragment
 import com.omarhezi.valetdevices.deviceslist.core.DevicesListViewModel
 import com.omarhezi.valetdevices.deviceslist.ui.adapter.DevicesListAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,12 +37,7 @@ class DevicesListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = DevicesListAdapter({ deviceId, favorite ->
-            viewModel.favoriteDevice(deviceId, favorite)
-        }, {
-            // TODO: 12/13/2021 go to device details
-        })
-        binding.allDevicesList.adapter = adapter
+        val adapter = setupAdapter()
 
         viewModel.devicesLiveData.observe(viewLifecycleOwner) {
             adapter.items = it
@@ -49,6 +47,19 @@ class DevicesListFragment : Fragment() {
         setupSearch()
 
         viewModel.getAllDevices()
+    }
+
+    private fun setupAdapter(): DevicesListAdapter {
+        val adapter = DevicesListAdapter({ deviceId, favorite ->
+            viewModel.favoriteDevice(deviceId, favorite)
+        }, { deviceId ->
+            findNavController().navigate(
+                R.id.action_details_fragment,
+                bundleOf(DeviceDetailsFragment.DEVICE to viewModel.findDeviceById(deviceId))
+            )
+        })
+        binding.allDevicesList.adapter = adapter
+        return adapter
     }
 
     private fun setupSearch() {

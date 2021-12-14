@@ -53,7 +53,7 @@ class DevicesListViewModel @Inject constructor(
     }
 
     fun favoriteDevice(deviceId: String, favorite: Boolean) {
-        val device = allDevices.find { it.id == deviceId }
+        val device = findDeviceById(deviceId)
         device?.isFavorite = favorite
 
         device?.let {
@@ -66,6 +66,8 @@ class DevicesListViewModel @Inject constructor(
             }
         }
     }
+
+    fun findDeviceById(deviceId: String) = allDevices.find { it.id == deviceId }
 
     private fun generateSections(allDevices: List<Device>): MutableList<SectionItem> {
         val sections = mutableListOf<SectionItem>(SectionItem.Header(R.string.all_devices))

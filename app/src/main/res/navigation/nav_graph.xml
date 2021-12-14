@@ -6,6 +6,21 @@
 
     <fragment
         android:id="@+id/devices_list_fragment"
-        android:name="com.omarhezi.valetdevices.deviceslist.ui.DevicesListFragment" />
+        android:name="com.omarhezi.valetdevices.deviceslist.ui.DevicesListFragment" >
+        <action
+            android:id="@+id/action_details_fragment"
+            app:destination="@id/device_details_fragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/device_details_fragment"
+        android:name="com.omarhezi.valetdevices.devicedetails.ui.DeviceDetailsFragment">
+        <argument
+            android:name="device"
+            app:argType="com.omarhezi.valetdevices.deviceslist.core.Device" />
+
+    </fragment>
 
 </navigation>
