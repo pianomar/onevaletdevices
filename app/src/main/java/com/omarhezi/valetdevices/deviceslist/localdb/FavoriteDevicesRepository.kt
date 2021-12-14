@@ -27,6 +27,6 @@ class FavoriteDevicesRepository(
     }
 
     suspend fun removeFavoriteDevice(device: Device) = withContext(dispatcher) {
-        device.id?.let { dao.removeFavoriteDevice(it) }
+        dao.removeFavoriteDevice(device.id)
     }
 }

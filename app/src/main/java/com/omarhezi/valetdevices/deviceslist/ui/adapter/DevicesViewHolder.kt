@@ -21,6 +21,7 @@ class DevicesViewHolder(
         viewData.status?.let { binding.deviceStatus.text = context.getString(it) }
         binding.deviceStatus.setTextColor(context.getColor(viewData.statusColor))
         binding.deviceType.text = viewData.type
+        binding.favButton.isChecked = viewData.isFavorite ?: false
 
         Glide
             .with(context)

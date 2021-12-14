@@ -22,15 +22,22 @@ class DevicesListViewModel @Inject constructor(
     private val _devicesLiveData = MutableLiveData<List<SectionItem>>()
     val devicesLiveData: LiveData<List<SectionItem>> = _devicesLiveData
 
-    private var devicesSections = listOf<SectionItem>()
     private var allDevices = listOf<Device>()
+    private val devicesSections
+        get() = generateSections(allDevices)
 
     fun getAllDevices() =
         viewModelScope.launch {
-            allDevices = repository.getAllDevices()
-            devicesSections = generateSections(allDevices)
+            val favoriteDevicesFlow = favoriteDevicesRepository.getFavoriteDevices()
 
-            _devicesLiveData.value = devicesSections
+            // Get favorite devices and match them with the main devices list
+            favoriteDevicesFlow.collect { favoriteDevices ->
+                allDevices = repository.getAllDevices().onEach { device ->
+                    val isFavorite = favoriteDevices.map { it.id }.contains(device.id)
+                    device.isFavorite = isFavorite
+                }
+                _devicesLiveData.value = devicesSections
+            }
         }
 
     fun getDevicesByQuery(text: String) {
@@ -47,6 +54,7 @@ class DevicesListViewModel @Inject constructor(
 
     fun favoriteDevice(deviceId: String, favorite: Boolean) {
         val device = allDevices.find { it.id == deviceId }
+        device?.isFavorite = favorite
 
         device?.let {
             viewModelScope.launch {
@@ -55,14 +63,6 @@ class DevicesListViewModel @Inject constructor(
                 } else {
                     favoriteDevicesRepository.removeFavoriteDevice(it)
                 }
-            }
-        }
-    }
-
-    fun getFav() {
-        viewModelScope.launch {
-            favoriteDevicesRepository.getFavoriteDevices().collect {
-
             }
         }
     }

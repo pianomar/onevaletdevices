@@ -9,7 +9,7 @@ data class Device(
     val currency: String? = null,
     val price: Int? = null,
     val type: String? = null,
-    val isFavorite: Boolean? = null,
+    var isFavorite: Boolean? = null,
     val description: String? = null,
     val title: String? = null,
     val id: String,
