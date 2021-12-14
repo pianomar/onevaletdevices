@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Omar/Work/Android/valetdevices/app/src/main/res/drawable/heart_selector.xml" value="0.2703125" />
+        <entry key="..\:/Omar/Work/Android/valetdevices/app/src/main/res/drawable/ic_heart.xml" value="0.2703125" />
+        <entry key="..\:/Omar/Work/Android/valetdevices/app/src/main/res/drawable/ic_heart_selected.xml" value="0.2703125" />
         <entry key="..\:/Omar/Work/Android/valetdevices/app/src/main/res/layout/activity_main.xml" value="0.1328125" />
         <entry key="..\:/Omar/Work/Android/valetdevices/app/src/main/res/layout/device_listitem.xml" value="0.20625" />
         <entry key="..\:/Omar/Work/Android/valetdevices/app/src/main/res/layout/devices_fragment.xml" value="0.264" />

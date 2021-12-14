@@ -7,9 +7,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/double_standard_margin"
         android:layout_marginTop="@dimen/double_standard_margin"
+        android:background="?selectableItemBackground"
         android:clickable="true"
-        android:focusable="true"
-        android:background="?selectableItemBackground">
+        android:focusable="true">
 
         <ImageView
             android:id="@+id/device_image"
@@ -50,14 +50,17 @@
             app:layout_constraintEnd_toStartOf="@+id/fav_button"
             app:layout_constraintStart_toStartOf="@id/device_name" />
 
-        <androidx.appcompat.widget.AppCompatCheckBox
+        <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/fav_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@null"
+            android:drawableStart="@drawable/heart_selector"
+            android:button="@null"
+            android:stateListAnimator="@animator/fav_button_anim"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

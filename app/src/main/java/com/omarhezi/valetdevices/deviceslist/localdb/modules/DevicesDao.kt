@@ -2,6 +2,7 @@ package com.omarhezi.valetdevices.deviceslist.localdb.modules
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
@@ -10,7 +11,7 @@ interface DevicesDao {
     @Query("SELECT * FROM favorite_devices_table")
     fun getFavoriteDevices(): Flow<List<DeviceEntity>>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addFavoriteDevice(device: DeviceEntity)
 
     @Query("DELETE FROM favorite_devices_table WHERE id = :deviceId")
