@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.omarhezi.valetdevices.DeviceListHelper
 import com.omarhezi.valetdevices.R
 import com.omarhezi.valetdevices.deviceslist.api.DevicesListRepository
 import com.omarhezi.valetdevices.deviceslist.localdb.FavoriteDevicesRepository
@@ -24,7 +25,7 @@ class DevicesListViewModel @Inject constructor(
 
     private var allDevices = listOf<Device>()
     private val devicesSections
-        get() = generateSections(allDevices)
+        get() = DeviceListHelper.generateSections(allDevices, R.string.all_devices)
 
     fun getAllDevices() =
         viewModelScope.launch {
@@ -48,7 +49,7 @@ class DevicesListViewModel @Inject constructor(
                 it.title?.contains(text, ignoreCase = true) ?: false
             }
 
-            _devicesLiveData.value = generateSections(filteredList)
+            _devicesLiveData.value = DeviceListHelper.generateSections(filteredList, R.string.all_devices)
         }
     }
 
@@ -68,12 +69,4 @@ class DevicesListViewModel @Inject constructor(
     }
 
     fun findDeviceById(deviceId: String) = allDevices.find { it.id == deviceId }
-
-    private fun generateSections(allDevices: List<Device>): MutableList<SectionItem> {
-        val sections = mutableListOf<SectionItem>(SectionItem.Header(R.string.all_devices))
-        sections.addAll(allDevices.map {
-            it.toViewData()
-        })
-        return sections
-    }
 }

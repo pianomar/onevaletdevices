@@ -39,6 +39,10 @@ class DevicesListFragment : Fragment() {
 
         val adapter = setupAdapter()
 
+        binding.favoriteDevicesButton.setOnClickListener {
+            findNavController().navigate(R.id.action_my_devices_fragment)
+        }
+
         viewModel.devicesLiveData.observe(viewLifecycleOwner) {
             adapter.items = it
             adapter.notifyDataSetChanged()

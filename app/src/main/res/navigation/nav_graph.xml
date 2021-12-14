@@ -6,10 +6,16 @@
 
     <fragment
         android:id="@+id/devices_list_fragment"
-        android:name="com.omarhezi.valetdevices.deviceslist.ui.DevicesListFragment" >
+        android:name="com.omarhezi.valetdevices.deviceslist.ui.DevicesListFragment">
         <action
             android:id="@+id/action_details_fragment"
             app:destination="@id/device_details_fragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_my_devices_fragment"
+            app:destination="@id/my_devices_fragment"
             app:enterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
@@ -22,5 +28,9 @@
             app:argType="com.omarhezi.valetdevices.deviceslist.core.Device" />
 
     </fragment>
+
+    <fragment
+        android:id="@+id/my_devices_fragment"
+        android:name="com.omarhezi.valetdevices.mydevices.ui.MyDevicesFragment" />
 
 </navigation>
