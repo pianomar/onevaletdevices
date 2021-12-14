@@ -7,7 +7,11 @@ import com.bumptech.glide.request.RequestOptions
 import com.omarhezi.valetdevices.databinding.DeviceListitemBinding
 import com.omarhezi.valetdevices.deviceslist.ui.SectionItem
 
-class DevicesViewHolder(private val binding: DeviceListitemBinding) :
+class DevicesViewHolder(
+    private val binding: DeviceListitemBinding,
+    private val favoriteListener: FavoriteDeviceListener? = null,
+    private val deviceListener: DeviceListener? = null
+) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(viewData: SectionItem.DeviceViewData) {
@@ -24,5 +28,25 @@ class DevicesViewHolder(private val binding: DeviceListitemBinding) :
             .fitCenter()
             .apply(RequestOptions.bitmapTransform(RoundedCorners(14)))
             .into(binding.deviceImage)
+
+        binding.favButton.setOnClickListener {
+            viewData.id?.let {
+                favoriteListener?.onFavoriteSelected(it, binding.favButton.isChecked)
+            }
+        }
+
+        binding.root.setOnClickListener {
+            viewData.id?.let {
+                deviceListener?.onDeviceSelected(it)
+            }
+        }
+    }
+
+    fun interface FavoriteDeviceListener {
+        fun onFavoriteSelected(deviceId: String, favorite: Boolean)
+    }
+
+    fun interface DeviceListener {
+        fun onDeviceSelected(deviceId: String)
     }
 }

@@ -2,6 +2,7 @@ package com.omarhezi.valetdevices.deviceslist.core
 
 import com.omarhezi.valetdevices.R
 import com.omarhezi.valetdevices.deviceslist.api.modules.DeviceResponse
+import com.omarhezi.valetdevices.deviceslist.localdb.modules.DeviceEntity
 import com.omarhezi.valetdevices.deviceslist.ui.SectionItem
 
 data class Device(
@@ -11,7 +12,7 @@ data class Device(
     val isFavorite: Boolean? = null,
     val description: String? = null,
     val title: String? = null,
-    val id: String? = null,
+    val id: String,
     val imageUrl: String? = null,
     val status: Status? = null,
 ) {
@@ -31,6 +32,14 @@ fun DeviceResponse.toDevice() = Device(
     id,
     imageUrl,
     Device.Status.values().firstOrNull { it.value == status }
+)
+
+fun Device.toDeviceEntity() = DeviceEntity(
+    id, currency, price, type, isFavorite, description, title, imageUrl, status = status?.value
+)
+
+fun DeviceEntity.toDevice() = Device(
+    currency, price, type, isFavorite, description, title, id, imageUrl, status = Device.Status.values().firstOrNull { it.value == status }
 )
 
 fun Device.toViewData() = SectionItem.DeviceViewData(

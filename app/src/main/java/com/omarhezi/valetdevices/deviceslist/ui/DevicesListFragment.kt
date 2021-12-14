@@ -34,7 +34,11 @@ class DevicesListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = DevicesListAdapter()
+        val adapter = DevicesListAdapter({ deviceId, favorite ->
+            viewModel.favoriteDevice(deviceId, favorite)
+        }, {
+            // TODO: 12/13/2021 go to device details
+        })
         binding.allDevicesList.adapter = adapter
 
         viewModel.devicesLiveData.observe(viewLifecycleOwner) {

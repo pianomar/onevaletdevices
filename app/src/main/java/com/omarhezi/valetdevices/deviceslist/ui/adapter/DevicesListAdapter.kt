@@ -7,7 +7,10 @@ import com.omarhezi.valetdevices.databinding.DeviceListitemBinding
 import com.omarhezi.valetdevices.databinding.DevicesListHeaderListitemBinding
 import com.omarhezi.valetdevices.deviceslist.ui.SectionItem
 
-class DevicesListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class DevicesListAdapter(
+    private val favoriteListener: DevicesViewHolder.FavoriteDeviceListener? = null,
+    private val deviceListener: DevicesViewHolder.DeviceListener? = null
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var items: List<SectionItem> = listOf()
 
@@ -21,7 +24,9 @@ class DevicesListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 )
             )
             SectionItem.ItemType.DEVICE.value -> DevicesViewHolder(
-                DeviceListitemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                DeviceListitemBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+                favoriteListener,
+                deviceListener
             )
             else -> throw ClassCastException("Unknown viewType $viewType")
         }

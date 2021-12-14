@@ -25,7 +25,7 @@ data class DeviceResponse(
 	val title: String? = null,
 
 	@Json(name="Id")
-	val id: String? = null,
+	val id: String,
 
 	@Json(name="imageUrl")
 	val imageUrl: String? = null,
