@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.omarhezi.valetdevices.R
 import com.omarhezi.valetdevices.databinding.DevicesFragmentBinding
 import com.omarhezi.valetdevices.devicedetails.ui.DeviceDetailsFragment
@@ -46,6 +48,13 @@ class DevicesListFragment : Fragment() {
         viewModel.devicesLiveData.observe(viewLifecycleOwner) {
             adapter.items = it
             adapter.notifyDataSetChanged()
+        }
+
+        viewModel.errorEventLiveData.observe(viewLifecycleOwner) {
+            it?.let {
+                Toast.makeText(requireActivity(), getString(it), Toast.LENGTH_LONG).show()
+                viewModel.hasShownErrorMessage()
+            }
         }
 
         setupSearch()

@@ -5,12 +5,19 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class DevicesListRepository(private val devicesAPI: DevicesAPI, private val dispatcher: CoroutineDispatcher = Dispatchers.IO) {
+class DevicesListRepository(
+    private val devicesAPI: DevicesAPI,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
+) {
     suspend fun getAllDevices() = withContext(dispatcher) {
-        val devices = devicesAPI.getAllDevices()
-        val devicesList = devices.devices
-        devicesList?.map {
-            it.toDevice()
-        }.orEmpty()
+        try {
+            val devices = devicesAPI.getAllDevices()
+            val devicesList = devices.devices
+            RequestResult.Success(devicesList?.map {
+                it.toDevice()
+            }.orEmpty())
+        } catch (throwable: Throwable) {
+            RequestResult.Error
+        }
     }
 }

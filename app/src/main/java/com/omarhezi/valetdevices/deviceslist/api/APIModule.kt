@@ -57,7 +57,7 @@ class MockInterceptor(private val context: Context) : Interceptor {
 
         return when (url.encodedPath) {
             "/$ALL_DEVICES_ENDPOINT" -> {
-                val response: String = readJsonFile(ALL_DEVICES_ENDPOINT)
+                val response = readJsonFile(ALL_DEVICES_ENDPOINT)
                 return Response.Builder()
                     .code(200)
                     .message(response)
@@ -67,13 +67,17 @@ class MockInterceptor(private val context: Context) : Interceptor {
                     .addHeader("content-type", "application/json")
                     .build()
             }
-            else -> Response.Builder()
-                .code(404)
-                .message("Error")
-                .request(chain.request())
-                .protocol(Protocol.HTTP_1_1)
-                .addHeader("content-type", "application/json")
-                .build()
+            else -> {
+                val response = readJsonFile(ERROR_FILE)
+                Response.Builder()
+                    .code(404)
+                    .message(response)
+                    .request(chain.request())
+                    .body(response.toResponseBody(response.toMediaTypeOrNull()))
+                    .protocol(Protocol.HTTP_1_1)
+                    .addHeader("content-type", "application/json")
+                    .build()
+            }
         }
     }
 
@@ -84,7 +88,8 @@ class MockInterceptor(private val context: Context) : Interceptor {
     }
 
     companion object {
-        public const val BASE_URL = "https://localhost/"
+        const val BASE_URL = "https://localhost/"
         const val ALL_DEVICES_ENDPOINT = "deviceslist"
+        const val ERROR_FILE = "errorbody"
     }
 }

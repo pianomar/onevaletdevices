@@ -3,6 +3,7 @@ package com.omarhezi.valetdevices.deviceslist.core
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.omarhezi.valetdevices.deviceslist.api.DevicesAPI
 import com.omarhezi.valetdevices.deviceslist.api.DevicesListRepository
+import com.omarhezi.valetdevices.deviceslist.api.RequestResult
 import com.omarhezi.valetdevices.deviceslist.api.modules.DeviceResponse
 import com.omarhezi.valetdevices.deviceslist.api.modules.DevicesListResponse
 import com.omarhezi.valetdevices.deviceslist.localdb.FavoriteDevicesRepository
@@ -43,11 +44,11 @@ class DevicesListViewModelTest {
     fun testGetAllDevices() {
 
         coEvery { favoritesRepository.getFavoriteDevices() } returns flowOf(listOf())
-        coEvery { repository.getAllDevices() } returns listOf(
+        coEvery { repository.getAllDevices() } returns RequestResult.Success(listOf(
             Device(
                 id = ID
             )
-        )
+        ))
         coEvery { api.getAllDevices() } returns DevicesListResponse(
             devices = listOf(
                 DeviceResponse(id = ID)
